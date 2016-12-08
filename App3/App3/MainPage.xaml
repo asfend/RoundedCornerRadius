@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App3"
+             x:Class="App3.MainPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <local:IsFirstOrLastItemColorConverter x:Key="isFirstOrLastColorConverter" />
+      <local:IsFirstOrLastItemConverter x:Key="isFirstOrLastItemConverter" />
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+
+  <ListView x:Name="MyItemsListView" ItemsSource="{Binding Employees}" >
+
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <ViewCell.View>
+
+								
+            
+            <local:ContentViewRoundedCorners
+              CornerRadius="{Binding IsFirstOrLastRadius, Converter={StaticResource isFirstOrLastItemConverter},ConverterParameter={x:Reference MyItemsListView}}"
+								BackgroundColor="{Binding IsFirstOrLast, Converter={StaticResource isFirstOrLastColorConverter},ConverterParameter={x:Reference MyItemsListView}}">
+              <Label Text="{Binding Name}"></Label>
+              <Label Text="{Binding Id}"></Label>
+            </local:ContentViewRoundedCorners>
+          </ViewCell.View>
+        </ViewCell>
+
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+
+</ContentPage>
